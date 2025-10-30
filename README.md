@@ -1,6 +1,6 @@
 # Claude Code EZ Switch
 
-A user-friendly Windows desktop application that allows you to easily switch between different Claude API configurations, including Z.ai, Anthropic Claude, and custom endpoints.
+A user-friendly Windows desktop application that allows you to easily switch between different Claude Code API configurations, including Z.ai, Anthropic Claude, and custom endpoints.
 
 **⚠️ Important Note**: This tool has only been tested with the CLI version of Claude Code and is not guaranteed to work with the VS Code extension version of Claude Code.
 
