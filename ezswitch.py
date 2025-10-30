@@ -11,7 +11,7 @@ class ClaudeConfigSwitcher:
     def __init__(self, root):
         self.root = root
         self.root.title("Claude Code EZ Switch")
-        self.root.geometry("600x680")
+        self.root.geometry("600x760")
         self.root.resizable(False, False)
         
         # Path for storing API keys persistently
@@ -197,7 +197,7 @@ class ClaudeConfigSwitcher:
         
         # Footer
         footer_frame = tk.Frame(main_frame, bg=self.bg_color)
-        footer_frame.pack(fill=tk.X, side=tk.BOTTOM, pady=(10, 0))
+        footer_frame.pack(fill=tk.X, side=tk.BOTTOM, pady=(20, 10))
         
         footer_text = "Claude Code EZ Switch is open source under the MIT license"
         footer_label = tk.Label(footer_frame, text=footer_text,
@@ -251,7 +251,8 @@ class ClaudeConfigSwitcher:
         
         self.claude_key_entry = tk.Entry(self.claude_frame, bg=self.entry_bg, fg=self.fg_color,
                                          insertbackground=self.fg_color, relief=tk.FLAT,
-                                         font=('Segoe UI', 10), bd=0, show="*", state=tk.DISABLED)
+                                         font=('Segoe UI', 10), bd=0, show="*", state=tk.DISABLED,
+                                         disabledbackground=self.entry_bg, disabledforeground="#888888")
         self.claude_key_entry.pack(fill=tk.X, padx=15, pady=(0, 2), ipady=8)
         
         # Add border to entry
@@ -296,11 +297,7 @@ class ClaudeConfigSwitcher:
     def load_existing_api_keys(self):
         """Load existing API keys from environment variables and pre-fill them"""
         try:
-            # Try to get API key and base URL
-            auth_token = os.getenv('ANTHROPIC_AUTH_TOKEN')
-            base_url = os.getenv('ANTHROPIC_BASE_URL')
-            
-            # Also check user-level environment variables via PowerShell
+            # Only check user-level environment variables via PowerShell (not current process)
             result = subprocess.run(
                 ['powershell', '-Command',
                  "[System.Environment]::GetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', 'User')"],
@@ -315,19 +312,17 @@ class ClaudeConfigSwitcher:
             )
             user_base_url = result.stdout.strip()
             
-            # Only update fields if they're empty (preserve user-entered keys)
-            # Pre-fill z.ai key if it's set and base_url points to z.ai
+            # Only update fields if they're empty AND if the environment variables are explicitly set
+            # Don't pre-fill anything if using subscription (no environment variables)
+            
+            # Pre-fill z.ai key only if it's set and base_url explicitly points to z.ai
             if user_auth_token and user_base_url and 'z.ai' in user_base_url:
                 if not self.zai_key_entry.get().strip():
                     self.zai_key_entry.delete(0, tk.END)
                     self.zai_key_entry.insert(0, user_auth_token)
-            elif auth_token and base_url and 'z.ai' in base_url:
-                if not self.zai_key_entry.get().strip():
-                    self.zai_key_entry.delete(0, tk.END)
-                    self.zai_key_entry.insert(0, auth_token)
             
-            # Pre-fill custom configuration if it's a custom endpoint
-            if user_auth_token and user_base_url and 'z.ai' not in user_base_url:
+            # Pre-fill custom configuration only if both auth token and base URL are set and it's not z.ai
+            elif user_auth_token and user_base_url and user_base_url.strip() and 'z.ai' not in user_base_url:
                 if not self.custom_url_entry.get().strip():
                     self.custom_url_entry.delete(0, tk.END)
                     self.custom_url_entry.insert(0, user_base_url)
@@ -335,27 +330,13 @@ class ClaudeConfigSwitcher:
                 if not self.custom_key_entry.get().strip():
                     self.custom_key_entry.delete(0, tk.END)
                     self.custom_key_entry.insert(0, user_auth_token)
-            elif auth_token and base_url and 'z.ai' not in base_url:
-                if not self.custom_url_entry.get().strip():
-                    self.custom_url_entry.delete(0, tk.END)
-                    self.custom_url_entry.insert(0, base_url)
-                
-                if not self.custom_key_entry.get().strip():
-                    self.custom_key_entry.delete(0, tk.END)
-                    self.custom_key_entry.insert(0, auth_token)
             
-            # Pre-fill Claude API key if it's set without base URL
-            if user_auth_token and not user_base_url:
+            # Pre-fill Claude API key only if auth token is set but base URL is explicitly empty/null
+            elif user_auth_token and not user_base_url:
                 if not self.claude_key_entry.get().strip():
                     self.claude_key_entry.configure(state=tk.NORMAL)
                     self.claude_key_entry.delete(0, tk.END)
                     self.claude_key_entry.insert(0, user_auth_token)
-                    self.claude_key_entry.configure(state=tk.DISABLED)
-            elif auth_token and not base_url:
-                if not self.claude_key_entry.get().strip():
-                    self.claude_key_entry.configure(state=tk.NORMAL)
-                    self.claude_key_entry.delete(0, tk.END)
-                    self.claude_key_entry.insert(0, auth_token)
                     self.claude_key_entry.configure(state=tk.DISABLED)
                 
         except Exception as e:
@@ -514,20 +495,16 @@ class ClaudeConfigSwitcher:
     def check_current_status(self):
         """Check current environment variable configuration"""
         try:
-            # Get current environment variables
-            auth_token = os.environ.get('ANTHROPIC_AUTH_TOKEN', '')
-            base_url = os.environ.get('ANTHROPIC_BASE_URL', '')
-            
-            # Check persistent user environment variables
+            # Only check persistent user environment variables (not current process)
             result = subprocess.run(
-                ['powershell', '-Command', 
+                ['powershell', '-Command',
                  "[System.Environment]::GetEnvironmentVariable('ANTHROPIC_AUTH_TOKEN', 'User')"],
                 capture_output=True, text=True, timeout=5
             )
             user_auth_token = result.stdout.strip()
             
             result = subprocess.run(
-                ['powershell', '-Command', 
+                ['powershell', '-Command',
                  "[System.Environment]::GetEnvironmentVariable('ANTHROPIC_BASE_URL', 'User')"],
                 capture_output=True, text=True, timeout=5
             )
@@ -555,7 +532,7 @@ class ClaudeConfigSwitcher:
                 
         except Exception as e:
             self.status_label.configure(
-                text=f"⚠ Could not determine current status\nError: {str(e)}", 
+                text=f"⚠ Could not determine current status\nError: {str(e)}",
                 fg=self.error_color
             )
     
