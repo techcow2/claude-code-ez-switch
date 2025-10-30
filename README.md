@@ -12,10 +12,7 @@ A Windows desktop application written in Python, that allows you to easily switc
 - **Easy Configuration Switching**: Seamlessly switch between Z.ai, Anthropic Claude, and custom API endpoints
 - **Persistent Storage**: Securely saves your API keys locally for convenience
 - **Real-time Status Display**: Shows your current configuration at a glance
-- **Modern Dark Theme**: Clean, professional interface with dark mode styling
-- **Password Visibility Toggle**: Show/hide API keys for security
 - **Automatic Detection**: Detects and pre-fills existing environment variables
-- **Threading Support**: Non-blocking UI with loading indicators
 
 ## 🔒 Security Features
 
