@@ -109,7 +109,7 @@ The application manages the following Windows user environment variables:
 
 ## 🔒 Security Features
 
-- **Local Storage**: API keys are stored locally in `~/.claude_code_ez_switch_config.json`
+- **Local Storage**: API keys are stored locally in `~/.claude_ez_switch/config.json`
 - **Password Masking**: API keys are hidden by default with asterisks
 - **Secure Environment Variables**: Uses Windows user-level environment variables
 - **No Cloud Storage**: No data is sent to external servers
@@ -141,7 +141,8 @@ The application manages the following Windows user environment variables:
 
 4. **API keys not saving**
    - Ensure the application has write permissions to your user home directory
-   - Check for the config file at `%USERPROFILE%\.claude_code_ez_switch_config.json`
+   - Check for the config directory at `%USERPROFILE%\.claude_ez_switch\`
+   - The config file should be located at `%USERPROFILE%\.claude_ez_switch\config.json`
 
 5. **PowerShell command failures**
    - Run the application as Administrator if you encounter permission issues
