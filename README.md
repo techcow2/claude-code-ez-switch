@@ -1,6 +1,6 @@
 # Claude Code EZ Switch
 
-A user-friendly Windows desktop application that allows you to easily switch between different Claude Code API configurations, including Z.ai, Anthropic Claude, and custom endpoints.
+A Windows desktop application written in Python, that allows you to easily switch between different Claude Code API configurations, including Z.ai, Anthropic Claude, and custom endpoints.
 
 
 ![Claude Code EZ Switch](https://img.shields.io/badge/Platform-Windows-blue?style=flat-square)
