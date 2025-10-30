@@ -119,7 +119,6 @@ The application manages the following Windows user environment variables:
 - **Dark Theme**: Easy on the eyes with professional dark color scheme
 - **Status Display**: Real-time configuration status with masked API keys
 - **Loading Indicators**: Visual feedback during configuration changes
-- **Hover Effects**: Interactive buttons with smooth transitions
 - **Responsive Layout**: Clean, organized interface with proper spacing
 
 ## 🐛 Troubleshooting
