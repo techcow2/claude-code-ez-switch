@@ -26,6 +26,20 @@ A user-friendly Windows desktop application that allows you to easily switch bet
 - **Not Tested**: VS Code extension version of Claude Code
 - **Dependencies**: tkinter (included with Python), subprocess, os, sys, threading, json, pathlib
 
+## 🔒 Security Features
+
+- **Local Storage**: API keys are stored locally in `~/.claude_ez_switch/config.json`
+- **Password Masking**: API keys are hidden by default with asterisks
+- **Secure Environment Variables**: Uses Windows user-level environment variables
+- **No Cloud Storage**: No data is sent to external servers
+
+## 🎨 Interface Features
+
+- **Dark Theme**: Easy on the eyes with professional dark color scheme
+- **Status Display**: Real-time configuration status with masked API keys
+- **Loading Indicators**: Visual feedback during configuration changes
+- **Responsive Layout**: Clean, organized interface with proper spacing
+
 ## 🛠️ Installation
 
 1. **Clone or download this repository**:
@@ -106,20 +120,6 @@ The application manages the following Windows user environment variables:
 **Custom**:
 - `ANTHROPIC_AUTH_TOKEN`: Your custom API key
 - `ANTHROPIC_BASE_URL`: Your custom endpoint URL
-
-## 🔒 Security Features
-
-- **Local Storage**: API keys are stored locally in `~/.claude_ez_switch/config.json`
-- **Password Masking**: API keys are hidden by default with asterisks
-- **Secure Environment Variables**: Uses Windows user-level environment variables
-- **No Cloud Storage**: No data is sent to external servers
-
-## 🎨 Interface Features
-
-- **Dark Theme**: Easy on the eyes with professional dark color scheme
-- **Status Display**: Real-time configuration status with masked API keys
-- **Loading Indicators**: Visual feedback during configuration changes
-- **Responsive Layout**: Clean, organized interface with proper spacing
 
 ## 🐛 Troubleshooting
 
