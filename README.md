@@ -35,8 +35,6 @@ Before installing Claude Code EZ Switch, ensure you have the following:
    python ezswitch.py
    ```
 
-No additional packages need to be installed - all dependencies are included with standard Python installations!
-
 ## 🎯 How to Use
 
 ### 1. Launch the Application
