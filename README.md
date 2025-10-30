@@ -14,12 +14,6 @@ A Windows desktop application written in Python, that allows you to easily switc
 - **Real-time Status Display**: Shows your current configuration at a glance
 - **Automatic Detection**: Detects and pre-fills existing environment variables
 
-## 🔒 Security Features
-
-- **Local Storage**: API keys are stored locally in `~/.claude_ez_switch/config.json`
-- **Secure Environment Variables**: Uses Windows user-level environment variables
-- **No Cloud Storage**: No data is sent to external servers
-
 ## 📋 Prerequisites
 
 Before installing Claude Code EZ Switch, ensure you have the following:
