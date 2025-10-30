@@ -84,10 +84,12 @@ After clicking "Apply Configuration":
 - The application will set the necessary environment variables
 - **🔴 CRITICAL**: You must close **ALL** applications running Claude Code, including:
   - VS Code (if running Claude Code in the VS Code terminal)
-  - PowerShell terminals
-  - Command Prompt terminals
+  - VS Code with Claude Code extension
+  - Claude Code CLI in PowerShell terminals
+  - Claude Code CLI in Command Prompt terminals
   - Any other applications using Claude Code
 - Then reopen these applications for changes to take effect
+- **Important**: The API configuration loaded in this app will reflect for both the CLI version and VS Code extension of Claude Code
 - Environment variables are only read when applications first start
 
 ### 4. Special Login Requirements
@@ -101,10 +103,12 @@ Use the "Refresh" button to check your current configuration status at any time.
 
 ## 🔧 Configuration Details
 
-The application manages the following Windows user environment variables:
+The application manages the following Windows user environment variables that are used by **both Claude Code CLI and Claude Code VS Code extension**:
 
 - `ANTHROPIC_AUTH_TOKEN`: Your API authentication token
 - `ANTHROPIC_BASE_URL`: The API base URL (if applicable)
+
+**Note**: The API configuration set by this application will be used by both the CLI version and the VS Code extension of Claude Code, as they both read from the same environment variables.
 
 ### Configuration Examples:
 
@@ -128,9 +132,10 @@ The application manages the following Windows user environment variables:
    - This app only works on Windows due to PowerShell environment variable management
 
 2. **Configuration not taking effect**
-   - **CRITICAL**: Make sure you have closed ALL applications using Claude Code (VS Code, PowerShell, Command Prompt, etc.) before reopening them
+   - **CRITICAL**: Make sure you have closed ALL applications using Claude Code (VS Code with Claude Code extension, Claude Code CLI in PowerShell, Claude Code CLI in Command Prompt, etc.) before reopening them
    - Environment variables are only loaded when applications start, not dynamically
    - Check that your application reads user-level environment variables
+   - Remember that both Claude Code CLI and VS Code extension use the same environment variables set by this application
 
 3. **Authentication issues when switching to Anthropic**
    - After switching to Anthropic configuration, you must run `claude code /login` in the CLI
