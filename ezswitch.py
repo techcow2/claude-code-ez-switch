@@ -15,7 +15,9 @@ class ClaudeConfigSwitcher:
         self.root.resizable(False, False)
         
         # Path for storing API keys persistently
-        self.config_file = Path.home() / ".claude_code_ez_switch_config.json"
+        self.config_dir = Path.home() / ".claude_ez_switch"
+        self.config_dir.mkdir(exist_ok=True)
+        self.config_file = self.config_dir / "config.json"
         
         # Configure style
         style = ttk.Style()
@@ -363,39 +365,53 @@ class ClaudeConfigSwitcher:
     def load_saved_api_keys(self):
         """Load API keys from the persistent storage file"""
         try:
+            saved_keys = {}
+            
+            # Check if new config file exists
             if self.config_file.exists():
                 with open(self.config_file, 'r') as f:
                     saved_keys = json.load(f)
-                
-                # Load z.ai key
-                if 'zai_key' in saved_keys:
-                    self.zai_key_entry.delete(0, tk.END)
-                    self.zai_key_entry.insert(0, saved_keys['zai_key'])
-                
-                # Load Claude key
-                if 'claude_key' in saved_keys:
-                    self.claude_key_entry.configure(state=tk.NORMAL)
-                    self.claude_key_entry.delete(0, tk.END)
-                    self.claude_key_entry.insert(0, saved_keys['claude_key'])
-                    self.claude_key_entry.configure(state=tk.DISABLED)
-                
-                # Load custom config
-                if 'custom_url' in saved_keys:
-                    self.custom_url_entry.delete(0, tk.END)
-                    self.custom_url_entry.insert(0, saved_keys['custom_url'])
-                
-                if 'custom_key' in saved_keys:
-                    self.custom_key_entry.delete(0, tk.END)
-                    self.custom_key_entry.insert(0, saved_keys['custom_key'])
-                
-                # Load Claude mode
-                if 'claude_mode' in saved_keys:
-                    self.claude_mode_var.set(saved_keys['claude_mode'])
-                    self.on_claude_mode_change()
-                
-                # Load selected config
-                if 'selected_config' in saved_keys:
-                    self.config_var.set(saved_keys['selected_config'])
+            else:
+                # Check if old config file exists and migrate it
+                old_config_file = Path.home() / ".claude_code_ez_switch_config.json"
+                if old_config_file.exists():
+                    with open(old_config_file, 'r') as f:
+                        saved_keys = json.load(f)
+                    # Save to new location
+                    with open(self.config_file, 'w') as f:
+                        json.dump(saved_keys, f, indent=2)
+                    # Remove old file
+                    old_config_file.unlink()
+            
+            # Load z.ai key
+            if 'zai_key' in saved_keys:
+                self.zai_key_entry.delete(0, tk.END)
+                self.zai_key_entry.insert(0, saved_keys['zai_key'])
+            
+            # Load Claude key
+            if 'claude_key' in saved_keys:
+                self.claude_key_entry.configure(state=tk.NORMAL)
+                self.claude_key_entry.delete(0, tk.END)
+                self.claude_key_entry.insert(0, saved_keys['claude_key'])
+                self.claude_key_entry.configure(state=tk.DISABLED)
+            
+            # Load custom config
+            if 'custom_url' in saved_keys:
+                self.custom_url_entry.delete(0, tk.END)
+                self.custom_url_entry.insert(0, saved_keys['custom_url'])
+            
+            if 'custom_key' in saved_keys:
+                self.custom_key_entry.delete(0, tk.END)
+                self.custom_key_entry.insert(0, saved_keys['custom_key'])
+            
+            # Load Claude mode
+            if 'claude_mode' in saved_keys:
+                self.claude_mode_var.set(saved_keys['claude_mode'])
+                self.on_claude_mode_change()
+            
+            # Load selected config
+            if 'selected_config' in saved_keys:
+                self.config_var.set(saved_keys['selected_config'])
         except Exception as e:
             # Silently fail if we can't load saved keys
             pass
