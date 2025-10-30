@@ -18,14 +18,6 @@ A user-friendly Windows desktop application that allows you to easily switch bet
 - **Automatic Detection**: Detects and pre-fills existing environment variables
 - **Threading Support**: Non-blocking UI with loading indicators
 
-## 📋 System Requirements
-
-- **Operating System**: Windows 10 or later
-- **Python**: 3.7 or higher
-- **Tested With**: Claude Code CLI version only
-- **Not Tested**: VS Code extension version of Claude Code
-- **Dependencies**: tkinter (included with Python), subprocess, os, sys, threading, json, pathlib
-
 ## 🔒 Security Features
 
 - **Local Storage**: API keys are stored locally in `~/.claude_ez_switch/config.json`
@@ -39,6 +31,14 @@ A user-friendly Windows desktop application that allows you to easily switch bet
 - **Status Display**: Real-time configuration status with masked API keys
 - **Loading Indicators**: Visual feedback during configuration changes
 - **Responsive Layout**: Clean, organized interface with proper spacing
+
+## 📋 Prerequisites
+
+Before installing Claude Code EZ Switch, ensure you have the following:
+
+- **Python**: Version 3.7 or higher
+- **Operating System**: Windows 10 or above
+- **Claude Code CLI**: The command-line interface version of Claude Code
 
 ## 🛠️ Installation
 
