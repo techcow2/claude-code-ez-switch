@@ -29,7 +29,6 @@ A Windows desktop application written in Python, that allows you to easily switc
 - **Dark Theme**: Easy on the eyes with professional dark color scheme
 - **Status Display**: Real-time configuration status with masked API keys
 - **Loading Indicators**: Visual feedback during configuration changes
-- **Responsive Layout**: Clean, organized interface with proper spacing
 
 ## 📋 Prerequisites
 
