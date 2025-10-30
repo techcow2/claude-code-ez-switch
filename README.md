@@ -20,11 +20,6 @@ A Windows desktop application written in Python, that allows you to easily switc
 - **Secure Environment Variables**: Uses Windows user-level environment variables
 - **No Cloud Storage**: No data is sent to external servers
 
-## 🎨 Interface Features
-
-- **Dark Theme**: Easy on the eyes with professional dark color scheme
-- **Status Display**: Real-time configuration status with masked API keys
-
 ## 📋 Prerequisites
 
 Before installing Claude Code EZ Switch, ensure you have the following:
