@@ -53,6 +53,9 @@ class ClaudeConfigSwitcher:
         self.create_widgets()
         self.load_saved_api_keys()
         self.load_existing_api_keys()
+        # Update UI to match loaded configuration
+        self.on_config_change()
+        self.on_claude_mode_change()
         self.check_current_status()
         
     def create_widgets(self):
