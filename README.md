@@ -17,7 +17,6 @@ A Windows desktop application written in Python, that allows you to easily switc
 ## 🔒 Security Features
 
 - **Local Storage**: API keys are stored locally in `~/.claude_ez_switch/config.json`
-- **Password Masking**: API keys are hidden by default with asterisks
 - **Secure Environment Variables**: Uses Windows user-level environment variables
 - **No Cloud Storage**: No data is sent to external servers
 
@@ -25,7 +24,6 @@ A Windows desktop application written in Python, that allows you to easily switc
 
 - **Dark Theme**: Easy on the eyes with professional dark color scheme
 - **Status Display**: Real-time configuration status with masked API keys
-- **Loading Indicators**: Visual feedback during configuration changes
 
 ## 📋 Prerequisites
 
